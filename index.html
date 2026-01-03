@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; }
+    #tap {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      /* stays “invisible” but clickable */
+    }
+  </style>
+</head>
+<body>
+  <button id="tap" aria-label="Tap anywhere to start"></button>
+  <audio id="audio" src="audio.wav" loop preload="auto"></audio>
+
+  <script>
+    const tap = document.getElementById("tap");
+    const audio = document.getElementById("audio");
+
+    async function startAudio() {
+      try {
+        await audio.play();          // allowed after a tap/click
+        tap.style.display = "none";  // blank screen
+      } catch (err) {
+        // If a browser blocks it for any reason, the button stays so they can tap again
+        console.log(err);
+      }
+    }
+
+    // “click” covers taps on mobile too
+    tap.addEventListener("click", startAudio, { once: true });
+  </script>
+</body>
+</html>
