@@ -12,7 +12,6 @@
       background: transparent;
       border: 0;
       padding: 0;
-      /* stays “invisible” but clickable */
     }
   </style>
 </head>
@@ -26,15 +25,13 @@
 
     async function startAudio() {
       try {
-        await audio.play();          // allowed after a tap/click
-        tap.style.display = "none";  // blank screen
+        await audio.play();
+        tap.style.display = "none";
       } catch (err) {
-        // If a browser blocks it for any reason, the button stays so they can tap again
         console.log(err);
       }
     }
 
-    // “click” covers taps on mobile too
     tap.addEventListener("click", startAudio, { once: true });
   </script>
 </body>
